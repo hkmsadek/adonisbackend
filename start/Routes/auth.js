@@ -14,10 +14,17 @@
 */
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
-require('./Routes/auth')
 const Route = use('Route')
 
-Route.get('/', () => {
-  return { greeting: 'Hello world in JSON' }
-})
+Route.group(()=>{
+  Route.post('signup', 'Auth/AuthController.signup')
+  Route.post('/login', 'Auth/AuthController.login')
+  Route.get('/myuser', 'Auth/AuthController.getUser')
+  Route.get('/post', 'Auth/AuthController.getUser')
+  Route.get('/logout', 'Auth/AuthController.logout')
+}).prefix('auth')
 
+// Route.get('/login', 'UserController.user')
+Route.get('/myuser', 'UserController.getUser')
+// Route.post('/post', 'UserController.getUser')
+Route.get('/logout', 'UserController.logout')
